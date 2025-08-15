@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jim & Ruby 婚禮喜帖</title>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <style>
+        body {
+            font-family: "Noto Sans TC", sans-serif;
+            margin: 0;
+            background-color: #fdfcf8;
+            color: #2f3e2f;
+        }
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: #2f3e2f;
+            color: #d4af37;
+        }
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .countdown {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+        .swiper {
+            width: 100%;
+            height: 300px;
+            margin-top: 20px;
+        }
+        .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .info {
+            padding: 30px;
+            text-align: center;
+        }
+        .info h2 {
+            color: #2f3e2f;
+            margin-bottom: 10px;
+        }
+        .map {
+            margin: 20px 0;
+        }
+        iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #2f3e2f;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Jim & Ruby</h1>
+    <p>2026 年 1 月 17 日</p>
+    <div class="countdown" id="countdown"></div>
+</header>
+
+<!-- 圖片輪播 -->
+<div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="https://picsum.photos/id/1011/800/400" alt="Photo 1"></div>
+        <div class="swiper-slide"><img src="https://picsum.photos/id/1015/800/400" alt="Photo 2"></div>
+        <div class="swiper-slide"><img src="https://picsum.photos/id/1016/800/400" alt="Photo 3"></div>
+    </div>
+    <div class="swiper-pagination"></div>
+</div>
+
+<!-- 婚禮資訊 -->
+<section class="info">
+    <h2>婚禮資訊</h2>
+    <p>📅 日期：2026 年 1 月 17 日</p>
+    <p>🕒 時間：16:00 證婚 · 17:00 晚宴</p>
+    <p>📍 地點：台中市西屯區 XXX 路 XXX 號</p>
+    <div class="map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!..." allowfullscreen></iframe>
+    </div>
+</section>
+
+<footer>
+    <p>💌 感謝您的祝福與蒞臨</p>
+</footer>
+
+<!-- JS -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+    // 圖片輪播
+    var swiper = new Swiper(".mySwiper", {
+        loop: true,
+        autoplay: { delay: 3000 },
+        pagination: { el: ".swiper-pagination" },
+    });
+
+    // 倒數計時
+    function updateCountdown() {
+        const weddingDate = new Date("2026-01-17T00:00:00");
+        const now = new Date();
+        const diff = weddingDate - now;
+
+        if (diff <= 0) {
+            document.getElementById("countdown").innerText = "婚禮進行中 🎉";
+            return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        document.getElementById("countdown").innerText = 
+            `倒數 ${days} 天 ${hours} 小時 ${minutes} 分 ${seconds} 秒`;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+</script>
+
+</body>
+</html>
